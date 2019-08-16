@@ -11,11 +11,34 @@ Write an efficient algorithm for the following assumptions:
 N is an integer within the range [1..2,147,483,647].
 """
 
+# Solution
+# def max_gap(x):
+#     max_gap_length = 0
+#     current_gap_length = 0
+#     for i in range(x.bit_length()):
+#         if x & (1 << i):
+#             # Set, any gap is over.
+#             if current_gap_length > max_gap_length:
+#                 max_gap_length = current_gap_length
+#             current_gap_length = 0
+#          else:
+#             # Not set, the gap widens.
+#             current_gap_length += 1
+#     # Gap might end at the end.
+#     if current_gap_length > max_gap_length:
+#         max_gap_length = current_gap_length
+#     return max_gap_length
+
+import numpy as np
+
 def solution(N):
-    pass
+    bin_N = bin(N).replace("0b", "")
+    print("${N} is ${bin_N}".format())
+
 
 
 if __name__ == '__main__':
-    N = 10
+    np.random.seed(77)
+    N = np.random.randint(1, 647)
     solution(N)
 
