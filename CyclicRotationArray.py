@@ -1,19 +1,16 @@
-def cyclic(idx, length, shift):
-    position = idx + shift
-    if position >= length:
-        position = position - length
-
-    return position
-
+# def cyclic(idx, length, shift):
+#     position = idx + shift
+#     if position >= length:
+#         position = position - length
+#
+#     return position
+#
 
 def solution(A, K):
     # write your code in Python 3.6
-    if len(A) == 1:
-        return A
-
     B = A[:]
     for i in range(len(A)):
-        B[cyclic(i, len(A), K)] = A[i]
+        B[(i+K)%len(A)] = A[i]
 
     return B
 
