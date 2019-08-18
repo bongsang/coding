@@ -32,52 +32,56 @@ all but one of the values in A occur an even number of times.
 '''
 
 
+'''
+package com.codility.lesson02.arrays;
+
+import java.util.HashMap;
+import java.util.Set;
+
+public class OddOccurrencesInArray {
+  public int solution(int[] A) {
+    HashMap <Integer, Integer> occurrencesMap = new HashMap<Integer, Integer>();
+    
+    for(int i=0; i<A.length; i++) {
+      if(occurrencesMap.containsKey(A[i])) {
+        int occurrences = occurrencesMap.get(A[i]);
+        occurrences++;
+        occurrencesMap.put(A[i], occurrences); //increment occurrence counter and store it
+      }
+      else {
+        occurrencesMap.put(A[i], 1); //1st occurrences of this value
+      }
+    }
+
+    Set keySet = occurrencesMap.keySet();
+    
+    for(int currentKey : keySet) {
+      int occurrences = occurrencesMap.get(currentKey);
+      
+      //if occurs odd number of times, we found the unpaired value - no need to continue checking
+      if(occurrences % 2 != 0) return currentKey;
+    }
+    //should never get to here
+    throw new RuntimeException("shouldn't get to here - should've return unpaired value by now");
+  }
+}
+'''
+
+
 def solution(A):
-    # write your code in Python 3.6
-    # odd = [x for x in A if A.count(x) % 2 == 1]
-    # print(odd[0])
-    # return odd[0]
+    dic = { x:0 for x in A }
 
-    print(A)
+    for i in range(len(A)):
+        if A[i] in dic:
+            dic[A[i]] += 1
 
-
-    while 0 < len(A):
-        for i in range(len(A)):
-            idx = []
-            count = 0
-            for j in range(len(A)):
-                print(f'Aj: {A[j]}, Ai:{A[i]}')
-                if A[j] == A[i]:
-                    count += 1
-                    idx.append(j)
-            print(f'count={count}, idx={idx}')
-
-            if count % 2 == 0:
-                del A[idx]
-                print(f'new A = {A}')
-                break
-            else:
-                return A[idx[0]]
-
-
-
-
-
-
-
-            if A.count(A[i])%2 == 0:
-                del A[i]
-            else:
-                return A[i]
+    for key, value in dic.items():
+        if value % 2 == 1:
+            return key
 
 
 if __name__ == '__main__':
-
-    # aa = {'a': 1, 'b':2, 'c':3}
-    # a, *b = aa.values()
-    # # print(f'{a}, {b}, {c}')
-    # print(f'{a}, {b}')
-
     A = [9, 3, 9, 3, 9, 7, 9]
+
     result = solution(A)
     print(f'In {A}, the odd number is {result}')
