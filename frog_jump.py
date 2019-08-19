@@ -25,4 +25,16 @@ X, Y and D are integers within the range [1..1,000,000,000];
 X ≤ Y.
 '''
 
-print(7%5)
+
+def solution(X, Y, D):
+    distance = Y - X
+    jump, remain = divmod(distance, D)
+    if remain != 0:
+        jump += 1
+
+    return jump
+
+
+if __name__ == '__main__':
+    print(solution(10, 85, 30))
+
