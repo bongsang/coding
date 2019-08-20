@@ -21,7 +21,26 @@ each element of array A is an integer within the range [−1,000,000..1,000,000]
 
 
 def solution(A):
-    # write your code in Python 3.6
-    A_min = min(A)
-    A_max = max(A)
-    print(f'min={A_min}, max={A_max}')
+    seen = [False] * len(A)
+    for value in A:
+        if 0 < value <= len(A):
+            seen[value - 1] = True
+
+    for idx in range(len(seen)):
+        if seen[idx] == False:
+            return idx + 1
+
+    return len(A) + 1
+
+
+if __name__ == '__main__':
+    A = [[1, 3, 6, 4, 1, 2],
+         [1, 2, 3],
+         [-1, -3]]
+
+    for a in A:
+        result = solution(a)
+        print(f'Missing number is {result}')
+
+
+
