@@ -20,6 +20,23 @@ each element of array A is an integer within the range [−1,000,000..1,000,000]
 '''
 
 
+# def solution(A):
+#     if max(A) < 0:
+#         return 1
+#
+#     A_dic = {x:0 for x in A}
+#     sequence_dic = {x: False for x in range(min(A), max(A)+1)}
+#
+#     for key in A_dic.keys():
+#         if key in sequence_dic:
+#             sequence_dic[key] = True
+#
+#     for key, value in sequence_dic.items():
+#         if not value:
+#             return key
+#
+#     return max(A)+1
+
 def solution(A):
     seen = [False] * len(A)
     for value in A:
@@ -27,7 +44,7 @@ def solution(A):
             seen[value - 1] = True
 
     for idx in range(len(seen)):
-        if seen[idx] == False:
+        if not seen[idx]:
             return idx + 1
 
     return len(A) + 1
@@ -38,8 +55,8 @@ if __name__ == '__main__':
          [1, 2, 3],
          [-1, -3]]
 
-    for a in A:
-        result = solution(a)
+    for value in A:
+        result = solution(value)
         print(f'Missing number is {result}')
 
 
